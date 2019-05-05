@@ -1,0 +1,14 @@
+*.DS_Store
+.idea/
+.settings/
+target/
+output/
+bin/
+*.iml
+common/.idea/
+.project
+*.classpath
+*.pid
+*.log
+*.log.*
+log.*

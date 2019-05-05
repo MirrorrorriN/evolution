@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mirror.evolution.repository.RiddleBaseInfoMapper">
+  <resultMap id="BaseResultMap" type="com.mirror.evolution.domain.RiddleBaseInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="riddle_question" jdbcType="VARCHAR" property="riddleQuestion" />
+    <result column="riddle_hint" jdbcType="VARCHAR" property="riddleHint" />
+    <result column="riddle_answer" jdbcType="VARCHAR" property="riddleAnswer" />
+    <result column="riddle_explanation" jdbcType="VARCHAR" property="riddleExplanation" />
+    <result column="solved_count" jdbcType="INTEGER" property="solvedCount" />
+    <result column="tried_count" jdbcType="INTEGER" property="triedCount" />
+    <result column="query_count" jdbcType="INTEGER" property="queryCount" />
+    <result column="answer_count" jdbcType="INTEGER" property="answerCount" />
+    <result column="riddle_type" jdbcType="INTEGER" property="riddleType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, riddle_question, riddle_hint, riddle_answer, riddle_explanation, solved_count, 
+    tried_count, query_count, answer_count, riddle_type, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.mirror.evolution.domain.RiddleBaseInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from riddle_base_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from riddle_base_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from riddle_base_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mirror.evolution.domain.RiddleBaseInfoExample">
+    delete from riddle_base_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mirror.evolution.domain.RiddleBaseInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into riddle_base_info (riddle_question, riddle_hint, riddle_answer, 
+      riddle_explanation, solved_count, tried_count, 
+      query_count, answer_count, riddle_type, 
+      create_time, update_time)
+    values (#{riddleQuestion,jdbcType=VARCHAR}, #{riddleHint,jdbcType=VARCHAR}, #{riddleAnswer,jdbcType=VARCHAR}, 
+      #{riddleExplanation,jdbcType=VARCHAR}, #{solvedCount,jdbcType=INTEGER}, #{triedCount,jdbcType=INTEGER}, 
+      #{queryCount,jdbcType=INTEGER}, #{answerCount,jdbcType=INTEGER}, #{riddleType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mirror.evolution.domain.RiddleBaseInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into riddle_base_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="riddleQuestion != null">
+        riddle_question,
+      </if>
+      <if test="riddleHint != null">
+        riddle_hint,
+      </if>
+      <if test="riddleAnswer != null">
+        riddle_answer,
+      </if>
+      <if test="riddleExplanation != null">
+        riddle_explanation,
+      </if>
+      <if test="solvedCount != null">
+        solved_count,
+      </if>
+      <if test="triedCount != null">
+        tried_count,
+      </if>
+      <if test="queryCount != null">
+        query_count,
+      </if>
+      <if test="answerCount != null">
+        answer_count,
+      </if>
+      <if test="riddleType != null">
+        riddle_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="riddleQuestion != null">
+        #{riddleQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="riddleHint != null">
+        #{riddleHint,jdbcType=VARCHAR},
+      </if>
+      <if test="riddleAnswer != null">
+        #{riddleAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="riddleExplanation != null">
+        #{riddleExplanation,jdbcType=VARCHAR},
+      </if>
+      <if test="solvedCount != null">
+        #{solvedCount,jdbcType=INTEGER},
+      </if>
+      <if test="triedCount != null">
+        #{triedCount,jdbcType=INTEGER},
+      </if>
+      <if test="queryCount != null">
+        #{queryCount,jdbcType=INTEGER},
+      </if>
+      <if test="answerCount != null">
+        #{answerCount,jdbcType=INTEGER},
+      </if>
+      <if test="riddleType != null">
+        #{riddleType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mirror.evolution.domain.RiddleBaseInfoExample" resultType="java.lang.Long">
+    select count(*) from riddle_base_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update riddle_base_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.riddleQuestion != null">
+        riddle_question = #{record.riddleQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riddleHint != null">
+        riddle_hint = #{record.riddleHint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riddleAnswer != null">
+        riddle_answer = #{record.riddleAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riddleExplanation != null">
+        riddle_explanation = #{record.riddleExplanation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.solvedCount != null">
+        solved_count = #{record.solvedCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.triedCount != null">
+        tried_count = #{record.triedCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.queryCount != null">
+        query_count = #{record.queryCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.answerCount != null">
+        answer_count = #{record.answerCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.riddleType != null">
+        riddle_type = #{record.riddleType,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update riddle_base_info
+    set id = #{record.id,jdbcType=BIGINT},
+      riddle_question = #{record.riddleQuestion,jdbcType=VARCHAR},
+      riddle_hint = #{record.riddleHint,jdbcType=VARCHAR},
+      riddle_answer = #{record.riddleAnswer,jdbcType=VARCHAR},
+      riddle_explanation = #{record.riddleExplanation,jdbcType=VARCHAR},
+      solved_count = #{record.solvedCount,jdbcType=INTEGER},
+      tried_count = #{record.triedCount,jdbcType=INTEGER},
+      query_count = #{record.queryCount,jdbcType=INTEGER},
+      answer_count = #{record.answerCount,jdbcType=INTEGER},
+      riddle_type = #{record.riddleType,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mirror.evolution.domain.RiddleBaseInfo">
+    update riddle_base_info
+    <set>
+      <if test="riddleQuestion != null">
+        riddle_question = #{riddleQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="riddleHint != null">
+        riddle_hint = #{riddleHint,jdbcType=VARCHAR},
+      </if>
+      <if test="riddleAnswer != null">
+        riddle_answer = #{riddleAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="riddleExplanation != null">
+        riddle_explanation = #{riddleExplanation,jdbcType=VARCHAR},
+      </if>
+      <if test="solvedCount != null">
+        solved_count = #{solvedCount,jdbcType=INTEGER},
+      </if>
+      <if test="triedCount != null">
+        tried_count = #{triedCount,jdbcType=INTEGER},
+      </if>
+      <if test="queryCount != null">
+        query_count = #{queryCount,jdbcType=INTEGER},
+      </if>
+      <if test="answerCount != null">
+        answer_count = #{answerCount,jdbcType=INTEGER},
+      </if>
+      <if test="riddleType != null">
+        riddle_type = #{riddleType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mirror.evolution.domain.RiddleBaseInfo">
+    update riddle_base_info
+    set riddle_question = #{riddleQuestion,jdbcType=VARCHAR},
+      riddle_hint = #{riddleHint,jdbcType=VARCHAR},
+      riddle_answer = #{riddleAnswer,jdbcType=VARCHAR},
+      riddle_explanation = #{riddleExplanation,jdbcType=VARCHAR},
+      solved_count = #{solvedCount,jdbcType=INTEGER},
+      tried_count = #{triedCount,jdbcType=INTEGER},
+      query_count = #{queryCount,jdbcType=INTEGER},
+      answer_count = #{answerCount,jdbcType=INTEGER},
+      riddle_type = #{riddleType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.mirror.evolution.domain.RiddleBaseInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from riddle_base_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
