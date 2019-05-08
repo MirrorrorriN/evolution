@@ -1,6 +1,9 @@
 package com.mirror.evolution.service;
 
 import com.google.gson.JsonObject;
+import com.mirror.evolution.domain.DTO.RiddleDTO;
+
+import java.util.List;
 
 /**
  * Created by mirrordingjing
@@ -8,5 +11,5 @@ import com.google.gson.JsonObject;
  * @Date 2019/5/8
  */
 public interface EsService {
-    JsonObject searchRiddle(String keyword);
+    List<RiddleDTO> searchRiddle(String keyword) throws Exception;
 }
