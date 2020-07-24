@@ -35,6 +35,7 @@ public class HelloProxyHandler implements InvocationHandler {
     public static void main(String[] args){
         System.getProperties().setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
         HelloInterface hello=new HelloService();
+        //可以认为proxyHello代理了invocationHandler,invocationHandler代理了hello（看生成代码中invoke调用）
         InvocationHandler invocationHandler=new HelloProxyHandler(hello);
         HelloInterface proxyHello = (HelloInterface) Proxy
                 .newProxyInstance(hello.getClass().getClassLoader(), hello.getClass().getInterfaces(), invocationHandler);
