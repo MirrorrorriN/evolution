@@ -1,2 +1,2 @@
-com.mirror.evolution.applet.spi.CakeService
-com.mirror.evolution.applet.spi.IceCreamService
+com.mirror.evolution.applet.service.CakeService
+com.mirror.evolution.applet.service.IceCreamService

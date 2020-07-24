@@ -12,3 +12,4 @@ common/.idea/
 *.log
 *.log.*
 log.*
+/com/sun/proxy
