@@ -10,12 +10,21 @@ public class ClassLoaderDemo {
     public static final void main(String[] args){
         ClassLoader classLoader=Object.class.getClassLoader();
         System.out.println(classLoader);
+        System.out.println("=================================");
+
         classLoader=AquaLookAndFeel.class.getClassLoader();
         System.out.println(classLoader);
+//        System.out.println(classLoader.getParent());
+        System.out.println("=================================");
+
         classLoader=DNSNameService.class.getClassLoader();
         System.out.println(classLoader);
+        System.out.println(classLoader.getParent());
+        System.out.println("=================================");
+
         classLoader=ClassLoaderDemo.class.getClassLoader();
         System.out.println(classLoader);
         System.out.println(classLoader.getParent());
+        System.out.println(classLoader.getParent().getParent());
     }
 }

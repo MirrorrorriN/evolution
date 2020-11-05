@@ -5,6 +5,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -22,7 +23,9 @@ public class CollectionsDemo {
         //对每一位使用生成的随机数位与当前位交换
         Collections.shuffle(alphabets);
         traverse(alphabets);
-        Collections.sort(alphabets);
+        Collections.sort(alphabets, (String o1,String o2)-> {
+            return 0;
+        });
         traverse(alphabets);
         Collections.reverse(alphabets);
         traverse(alphabets);

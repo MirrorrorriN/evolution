@@ -35,7 +35,7 @@ public class BlockingQueueBased {
         }
     }
 
-    class Consumer extends Thread {
+    class Consumer implements Runnable {
         @Override
         public void run() {
             while (true) {
@@ -58,7 +58,7 @@ public class BlockingQueueBased {
     public static void main(String[] args) {
         BlockingQueueBased pc = new BlockingQueueBased();
         Producer producer = pc.new Producer();
-        Consumer consumer = pc.new Consumer();
+        Thread consumer = new Thread(pc.new Consumer());
         producer.start();
         consumer.start();
     }

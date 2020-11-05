@@ -13,3 +13,4 @@ common/.idea/
 *.log.*
 log.*
 /com/sun/proxy
+/tmp

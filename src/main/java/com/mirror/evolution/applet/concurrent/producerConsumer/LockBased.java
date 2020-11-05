@@ -53,11 +53,13 @@ public class LockBased {
         public void run() {
             while (true) {
                 lock.lock();
+//                System.out.println("after lock"+this.getState().name());
                 try {
                     while (buffer.size() == 0) {
                         System.out.println("当前队列为空");
                         try {
                             condition.await();
+//                            System.out.println("after await"+this.getState().name());
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -82,5 +84,15 @@ public class LockBased {
         Consumer consumer = pc.new Consumer();
         producer.start();
         consumer.start();
+        while (true) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //尝试获取lock会使线程进入 BLOCKED状态 await()也与wait()类似会使线程进入WAITING状态
+            System.out.println("[producer]" + producer.getState().name());
+            System.out.println("[consumer]" + consumer.getState().name());
+        }
     }
 }

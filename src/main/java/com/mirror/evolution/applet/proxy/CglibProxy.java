@@ -26,7 +26,7 @@ public class CglibProxy implements MethodInterceptor {
 
     public static void main(String[] args){
         //在指定目录下生成动态代理类，我们可以反编译看一下里面到底是一些什么东西
-        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "/Users/didi/didi/git/evolution/com/sun/proxy/cglib");
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "./com/sun/proxy/cglib");
         //创建Enhancer对象，类似于JDK动态代理的Proxy类，下一步就是设置几个参数
         Enhancer enhancer = new Enhancer();
         //设置目标类的字节码文件

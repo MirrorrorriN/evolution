@@ -19,8 +19,10 @@ public class StringDemo {
         System.out.println(str2.getBytes());
         str1=str0;
         str0="world";
+        str2=new StringBuilder(str0).reverse().toString();
         System.out.println(str0);  //world
         System.out.println(str1);  //hello
+        System.out.println(str2);
         //非线程安全
         StringBuilder stringBuilder=new StringBuilder();
         //方法无synchronized关键字
@@ -69,5 +71,15 @@ public class StringDemo {
         long time6 = System.currentTimeMillis();
         System.out.println("StringBuffer 占用了内存：" + (num5 - num6));
         System.out.println("StringBuffer 占用了时间：" + (time6 - time5));
+
+        //intern() https://www.jianshu.com/p/0d1c003d2ff5
+        // 常量池中已缓存 直接返回引用 未缓存 将字符串添加到常量池并返回引用
+        // JDK8 常量池在堆上分配
+        String s1 = new StringBuilder().append("String").append("Test").toString();
+        System.out.println(s1.intern() == s1);  //true
+
+        String s2 = new StringBuilder().append("ja").append("va").toString();
+        System.out.println(s2.intern() == s2);  //false
+
     }
 }
