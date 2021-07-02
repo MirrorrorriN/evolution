@@ -17,7 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <!--两个包的版本要配合使用 参考 https://github.com/spring-projects/spring-data-elasticsearch/pom文件中属性-->
-        <elasticsearch.version>5.5.1</elasticsearch.version>
+        <elasticsearch.version>6.8.15</elasticsearch.version>
         <spring.boot.version>2.1.3.RELEASE</spring.boot.version>
         <springfox.version>2.7.0</springfox.version>
     </properties>
